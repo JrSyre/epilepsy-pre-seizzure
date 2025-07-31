@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+{% block content %}
+<main>
+    <h2>Book Appointment</h2>
+    <form id="appointment-form" method="post">
+        <input type="text" name="patient" placeholder="Patient Name" required>
+        <input type="text" name="doctor" placeholder="Doctor Name" required>
+        <input type="date" name="date" required>
+        <input type="time" name="time" required>
+        <button type="submit">Book</button>
+    </form>
+    {% if result %}
+        <div class="success">{{ result }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    <h2>Appointments</h2>
+    <div id="appointments-list">
+        {% if appointments %}
+            <ul>
+            {% for appt in appointments %}
+                <li>{{ appt.patient }} with {{ appt.doctor }} on {{ appt.date }} at {{ appt.time }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <em>No appointments found.</em>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

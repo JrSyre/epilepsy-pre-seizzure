@@ -1,0 +1,32 @@
+{% extends 'home.html' %}
+{% block content %}
+<main>
+    <h2>Schedule Medication</h2>
+    <form id="medication-form" method="post">
+        <input type="text" name="patient" placeholder="Patient Name" required>
+        <input type="text" name="drug_name" placeholder="Drug Name" required>
+        <input type="text" name="dosage" placeholder="Dosage" required>
+        <input type="text" name="instructions" placeholder="Instructions">
+        <input type="text" name="times" placeholder="Times (comma-separated)">
+        <button type="submit">Schedule</button>
+    </form>
+    {% if result %}
+        <div class="success">{{ result }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    <h2>Medication Schedule</h2>
+    <div id="medication-list">
+        {% if medications %}
+            <ul>
+            {% for med in medications %}
+                <li>{{ med.patient }}: {{ med.drug_name }} ({{ med.dosage }}) at {{ med.times|join(', ') }} - {{ med.instructions }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <em>No medication schedules found.</em>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

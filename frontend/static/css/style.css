@@ -1,0 +1,119 @@
+body.gradient-bg {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a1437 0%, #1a237e 60%, #ff69b4 100%);
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    background: rgba(10, 20, 55, 0.95);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ff69b4, #fff 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navbar a:hover {
+    color: #ff69b4;
+}
+
+main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background: rgba(10, 20, 55, 0.7);
+    border-radius: 1rem;
+    box-shadow: 0 4px 32px 0 rgba(255, 105, 180, 0.08);
+}
+
+.health-status {
+    margin-bottom: 2rem;
+}
+
+.health-indicator {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #0a1437;
+    box-shadow: 0 0 16px 2px #43e97b44;
+}
+
+.health-indicator.healthy {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #0a1437;
+}
+
+.health-indicator.unhealthy {
+    background: linear-gradient(90deg, #ff1744 0%, #ff69b4 100%);
+    color: #fff;
+}
+
+.success {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #0a1437;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    box-shadow: 0 0 8px 2px #43e97b44;
+}
+
+.error {
+    background: linear-gradient(90deg, #ff1744 0%, #ff69b4 100%);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    box-shadow: 0 0 8px 2px #ff69b444;
+}
+
+.prediction-result.high-risk {
+    background: linear-gradient(90deg, #ff1744 0%, #ff69b4 100%);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    box-shadow: 0 0 16px 2px #ff69b444;
+}
+
+.prediction-result.low-risk {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+    color: #0a1437;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    box-shadow: 0 0 16px 2px #43e97b44;
+}

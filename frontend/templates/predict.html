@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% block content %}
+<main>
+    <h2>Seizure Prediction</h2>
+    <form id="predict-form" method="post">
+        <label for="features">EEG Features (comma-separated, 115 values):</label><br>
+        <textarea id="features" name="features" rows="4" cols="80" required></textarea><br><br>
+        <button type="submit">Predict</button>
+    </form>
+    {% if result %}
+        <div class="prediction-result {{ 'high-risk' if result.prediction == 1 else 'low-risk' }}">
+            <strong>Status:</strong> {{ result.status }}<br>
+            <strong>Confidence:</strong> {{ result.confidence }}<br>
+            <strong>Message:</strong> {{ result.message }}
+        </div>
+    {% endif %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+</main>
+{% endblock %}

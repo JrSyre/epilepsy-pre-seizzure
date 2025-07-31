@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+{% block content %}
+<main>
+    <h2>Log Seizure Progress</h2>
+    <form id="progress-form" method="post">
+        <input type="date" name="date" required>
+        <input type="text" name="patient" placeholder="Patient Name" required>
+        <input type="number" name="occurred" min="0" max="1" placeholder="Occurred (0 or 1)" required>
+        <input type="text" name="notes" placeholder="Notes">
+        <button type="submit">Log</button>
+    </form>
+    {% if result %}
+        <div class="success">{{ result }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    <h2>Progress Log</h2>
+    <div id="progress-list">
+        {% if progress_logs %}
+            <ul>
+            {% for log in progress_logs %}
+                <li>{{ log.date }} - {{ log.patient }}: Occurred={{ log.occurred }}, Notes: {{ log.notes }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <em>No progress logs found.</em>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
