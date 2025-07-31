@@ -4,15 +4,18 @@ body.gradient-bg {
     color: #fff;
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
+    position: relative;
+    overflow-x: hidden;
 }
 
 .navbar {
-    background: rgba(10, 20, 55, 0.95);
+    background: linear-gradient(90deg, #0a1437 60%, #ff69b4 100%);
     padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+    box-shadow: 0 2px 16px 0 #ff69b488, 0 1.5px 0 #fff1;
+    border-bottom: 2px solid #ff69b4;
 }
 
 .navbar h1 {
@@ -22,6 +25,7 @@ body.gradient-bg {
     background: linear-gradient(90deg, #ff69b4, #fff 80%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px #ff69b4aa);
 }
 
 .navbar ul {
@@ -36,20 +40,24 @@ body.gradient-bg {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.2s, text-shadow 0.2s;
+    text-shadow: 0 0 6px #0a1437, 0 0 12px #ff69b4aa;
 }
 
 .navbar a:hover {
     color: #ff69b4;
+    text-shadow: 0 0 12px #ff69b4, 0 0 24px #fff;
 }
 
 main {
     padding: 2rem;
     max-width: 800px;
     margin: 2rem auto;
-    background: rgba(10, 20, 55, 0.7);
-    border-radius: 1rem;
-    box-shadow: 0 4px 32px 0 rgba(255, 105, 180, 0.08);
+    background: rgba(10, 20, 55, 0.85);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 32px 0 #ff69b444, 0 0 40px 0 #1a237e55;
+    position: relative;
+    z-index: 1;
 }
 
 .health-status {
@@ -116,4 +124,51 @@ main {
     margin: 1rem 0;
     font-weight: bold;
     box-shadow: 0 0 16px 2px #43e97b44;
+}
+
+footer.footer-gradient {
+    width: 100vw;
+    background: linear-gradient(90deg, #ff69b4 0%, #0a1437 100%);
+    color: #fff;
+    text-align: center;
+    padding: 1.2rem 0 1rem 0;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    box-shadow: 0 -2px 16px 0 #ff69b488;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+input, textarea, button {
+    border-radius: 0.7rem;
+    border: none;
+    padding: 0.7rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    background: #1a237e;
+    color: #fff;
+    box-shadow: 0 0 8px #ff69b444;
+    outline: none;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+input:focus, textarea:focus {
+    background: #232e5c;
+    box-shadow: 0 0 12px #ff69b4cc;
+}
+
+button {
+    background: linear-gradient(90deg, #ff69b4 0%, #1a237e 100%);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff69b4aa;
+    border: none;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #1a237e 0%, #ff69b4 100%);
+    box-shadow: 0 0 24px #ff69b4cc;
 }

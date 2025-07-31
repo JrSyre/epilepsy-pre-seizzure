@@ -22,10 +22,15 @@
             <h2>System Health</h2>
             <div class="health-indicator healthy">Healthy</div>
         </section>
+        {% block content %}
         <section>
             <h2>Welcome!</h2>
             <p>This is the Seizure Prediction Web App frontend. Use the navigation above to access features.</p>
         </section>
+        {% endblock %}
     </main>
+    <footer class="footer-gradient">
+        <span>&copy; 2025 Seizure Prediction Web App</span>
+    </footer>
 </body>
 </html>
