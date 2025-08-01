@@ -3,7 +3,6 @@
   --purple: #A259FF;
   --white: #fff;
   --radius: 1.2rem;
-  --shadow: 0 4px 24px rgba(27,31,59,0.18);
   --font: 'Poppins', 'Inter', Arial, sans-serif;
 }
 
@@ -24,7 +23,6 @@ body.gradient-bg {
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 2rem;
-  box-shadow: var(--shadow);
   position: relative;
 }
 
@@ -109,7 +107,6 @@ body.gradient-bg {
   padding: 4rem 1rem 2rem 1rem;
   background: linear-gradient(120deg, var(--navy) 60%, var(--purple) 100%);
   border-radius: 0 0 2rem 2rem;
-  box-shadow: var(--shadow);
 }
 
 .hero h1 {
@@ -144,7 +141,6 @@ body.gradient-bg {
   font-size: 1.1rem;
   font-family: var(--font);
   font-weight: 600;
-  box-shadow: 0 2px 12px #a259ffaa;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, transform 0.2s;
   margin-bottom: 0.5rem;
@@ -175,7 +171,6 @@ section.about, section.coming-soon {
   padding: 2rem 1.5rem;
   border-radius: var(--radius);
   max-width: 700px;
-  box-shadow: var(--shadow);
 }
 
 section.about h2, section.coming-soon h2 {
@@ -203,7 +198,6 @@ footer {
   letter-spacing: 1px;
   margin-top: auto;
   border-radius: 2rem 2rem 0 0;
-  box-shadow: 0 -2px 16px 0 #a259ff88;
 }
 
 @media (max-width: 600px) {
@@ -221,7 +215,6 @@ footer {
   padding: 2rem 1.5rem;
   border-radius: var(--radius);
   max-width: 700px;
-  box-shadow: var(--shadow);
 }
 
 #predict-form label {
@@ -240,7 +233,6 @@ footer {
   padding: 0.8rem;
   background: var(--navy);
   color: var(--white);
-  box-shadow: 0 0 8px #a259ffaa;
   resize: vertical;
 }
 
@@ -250,7 +242,6 @@ footer {
   border-radius: var(--radius);
   font-size: 1.1rem;
   font-weight: 500;
-  box-shadow: 0 0 16px #a259ffaa;
   background: var(--purple);
   color: var(--navy);
   transition: background 0.2s, color 0.2s;
@@ -259,19 +250,16 @@ footer {
 .status-box.high-risk {
   background: #ff1744;
   color: #fff;
-  box-shadow: 0 0 24px #ff1744aa;
 }
 
 .status-box.low-risk {
   background: #43e97b;
   color: #1B1F3B;
-  box-shadow: 0 0 24px #43e97baa;
 }
 
 .status-box.error {
   background: #ff1744;
   color: #fff;
-  box-shadow: 0 0 24px #ff1744aa;
 }
 
 /* Appointments page styles */
@@ -282,7 +270,6 @@ footer {
   padding: 2rem 1.5rem;
   border-radius: var(--radius);
   max-width: 700px;
-  box-shadow: var(--shadow);
 }
 
 #appointment-form label {
@@ -301,7 +288,6 @@ footer {
   padding: 0.8rem;
   background: var(--navy);
   color: var(--white);
-  box-shadow: 0 0 8px #a259ffaa;
 }
 
 .appointments-list {
@@ -315,7 +301,6 @@ footer {
   background: var(--purple);
   color: var(--navy);
   border-radius: var(--radius);
-  box-shadow: 0 0 12px #a259ffaa;
   padding: 1rem 1.2rem;
   font-size: 1rem;
   font-weight: 500;
@@ -323,7 +308,6 @@ footer {
 }
 
 .appointment-card:hover {
-  box-shadow: 0 0 24px #a259ffcc;
   transform: scale(1.02);
 }
 
@@ -335,7 +319,6 @@ footer {
   padding: 2rem 1.5rem;
   border-radius: var(--radius);
   max-width: 700px;
-  box-shadow: var(--shadow);
 }
 
 #medication-form label {
@@ -354,7 +337,6 @@ footer {
   padding: 0.8rem;
   background: var(--navy);
   color: var(--white);
-  box-shadow: 0 0 8px #a259ffaa;
 }
 
 .medication-list {
@@ -368,7 +350,6 @@ footer {
   background: var(--purple);
   color: var(--navy);
   border-radius: var(--radius);
-  box-shadow: 0 0 12px #a259ffaa;
   padding: 1rem 1.2rem;
   font-size: 1rem;
   font-weight: 500;
@@ -376,7 +357,6 @@ footer {
 }
 
 .medication-card:hover {
-  box-shadow: 0 0 24px #a259ffcc;
   transform: scale(1.02);
 }
 
@@ -388,7 +368,6 @@ footer {
   padding: 2rem 1.5rem;
   border-radius: var(--radius);
   max-width: 700px;
-  box-shadow: var(--shadow);
 }
 
 #progress-form label {
@@ -407,7 +386,6 @@ footer {
   padding: 0.8rem;
   background: var(--navy);
   color: var(--white);
-  box-shadow: 0 0 8px #a259ffaa;
 }
 
 .progress-list {
@@ -421,7 +399,6 @@ footer {
   background: var(--purple);
   color: var(--navy);
   border-radius: var(--radius);
-  box-shadow: 0 0 12px #a259ffaa;
   padding: 1rem 1.2rem;
   font-size: 1rem;
   font-weight: 500;
@@ -433,7 +410,6 @@ footer {
 }
 
 .progress-card:hover {
-  box-shadow: 0 0 24px #a259ffcc;
   transform: scale(1.02);
 }
 
