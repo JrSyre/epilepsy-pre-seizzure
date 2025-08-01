@@ -1,0 +1,328 @@
+:root {
+  --navy: #1B1F3B;
+  --pink: #FFC6C6;
+  --white: #fff;
+  --radius: 1.2rem;
+  --shadow: 0 4px 24px rgba(27,31,59,0.18);
+  --font: 'Poppins', 'Inter', Arial, sans-serif;
+}
+
+body.gradient-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--pink) 100%);
+  color: var(--white);
+  font-family: var(--font);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: var(--navy);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  background: var(--pink);
+  color: var(--navy);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  background: var(--white);
+  height: 3px;
+  width: 28px;
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s;
+}
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+.hamburger::before { top: -8px; }
+.hamburger::after { top: 8px; }
+
+@media (max-width: 800px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    flex-direction: column;
+    gap: 0;
+    display: none;
+    z-index: 10;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 2rem 1rem;
+  background: linear-gradient(120deg, var(--navy) 60%, var(--pink) 100%);
+  border-radius: 0 0 2rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--white) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero .subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--white);
+  opacity: 0.95;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn {
+  background: var(--pink);
+  color: var(--navy);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-family: var(--font);
+  font-weight: 600;
+  box-shadow: 0 2px 12px #ffc6c6aa;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: var(--white);
+  border: 2px solid var(--pink);
+}
+
+.btn:hover, .btn:focus {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px) scale(1.04);
+  outline: none;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background: var(--pink);
+  color: var(--navy);
+}
+
+section.about, section.coming-soon {
+  background: rgba(27,31,59,0.85);
+  color: var(--white);
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius);
+  max-width: 700px;
+  box-shadow: var(--shadow);
+}
+
+section.about h2, section.coming-soon h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.badge {
+  background: var(--pink);
+  color: var(--navy);
+  border-radius: 1rem;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  color: var(--white);
+  background: var(--navy);
+  padding: 1.2rem 0 1rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-top: auto;
+  border-radius: 2rem 2rem 0 0;
+  box-shadow: 0 -2px 16px 0 #ffc6c688;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.5rem; }
+  .hero { padding: 2rem 0.5rem 1rem 0.5rem; }
+  section.about, section.coming-soon { padding: 1rem 0.5rem; }
+  .btn, .btn-primary { padding: 0.7rem 1.2rem; font-size: 1rem; }
+}
+
+/* Predict page styles */
+.predict-section {
+  background: rgba(27,31,59,0.85);
+  color: var(--white);
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius);
+  max-width: 700px;
+  box-shadow: var(--shadow);
+}
+
+#predict-form label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-weight: 500;
+}
+
+#predict-form textarea {
+  width: 100%;
+  min-height: 80px;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: var(--navy);
+  color: var(--white);
+  box-shadow: 0 0 8px #ffc6c6aa;
+  resize: vertical;
+}
+
+.status-box {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 0 16px #ffc6c6aa;
+  background: var(--pink);
+  color: var(--navy);
+  transition: background 0.2s, color 0.2s;
+}
+
+.status-box.high-risk {
+  background: #ff1744;
+  color: #fff;
+  box-shadow: 0 0 24px #ff1744aa;
+}
+
+.status-box.low-risk {
+  background: #43e97b;
+  color: #1B1F3B;
+  box-shadow: 0 0 24px #43e97baa;
+}
+
+.status-box.error {
+  background: #ff1744;
+  color: #fff;
+  box-shadow: 0 0 24px #ff1744aa;
+}
+
+/* Appointments page styles */
+.appointments-section {
+  background: rgba(27,31,59,0.85);
+  color: var(--white);
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius);
+  max-width: 700px;
+  box-shadow: var(--shadow);
+}
+
+#appointment-form label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+#appointment-form input {
+  width: 100%;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: none;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: var(--navy);
+  color: var(--white);
+  box-shadow: 0 0 8px #ffc6c6aa;
+}
+
+.appointments-list {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.appointment-card {
+  background: var(--pink);
+  color: var(--navy);
+  border-radius: var(--radius);
+  box-shadow: 0 0 12px #ffc6c6aa;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.appointment-card:hover {
+  box-shadow: 0 0 24px #ff69b4cc;
+  transform: scale(1.02);
+}

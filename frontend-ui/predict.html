@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seizure Prediction – Predict</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet"/>
+</head>
+<body class="gradient-bg">
+  <nav class="navbar">
+    <div class="nav-brand">Seizure Prediction</div>
+    <button class="nav-toggle" aria-label="Open menu">
+      <span class="hamburger"></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="predict.html" class="active">Predict</a></li>
+      <li><a href="appointments.html">Appointments</a></li>
+      <li><a href="medication.html">Medication</a></li>
+      <li><a href="progress.html">Progress</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="hero">
+      <h1>Seizure Risk Prediction</h1>
+      <p class="subtitle">
+        Enter your EEG features below to get an instant AI-powered seizure risk assessment.
+      </p>
+    </section>
+    <section class="predict-section">
+      <form id="predict-form" autocomplete="off">
+        <label for="features">EEG Features (comma-separated, 115 values):</label>
+        <textarea id="features" name="features" rows="4" placeholder="e.g. 0.1, 0.2, 0.3, ... (115 values)" required></textarea>
+        <button type="submit" class="btn btn-primary">Predict</button>
+        <button type="button" class="btn" id="sample-btn">Sample Input</button>
+      </form>
+      <div id="prediction-result" class="status-box" style="display:none;"></div>
+    </section>
+  </main>
+  <footer>
+    © 2025 Seizure Prediction Web App
+  </footer>
+  <script src="assets/main.js"></script>
+  <script src="assets/predict.js"></script>
+</body>
+</html>

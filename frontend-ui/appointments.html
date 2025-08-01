@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seizure Prediction – Appointments</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet"/>
+</head>
+<body class="gradient-bg">
+  <nav class="navbar">
+    <div class="nav-brand">Seizure Prediction</div>
+    <button class="nav-toggle" aria-label="Open menu">
+      <span class="hamburger"></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="predict.html">Predict</a></li>
+      <li><a href="appointments.html" class="active">Appointments</a></li>
+      <li><a href="medication.html">Medication</a></li>
+      <li><a href="progress.html">Progress</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="hero">
+      <h1>Manage Appointments</h1>
+      <p class="subtitle">
+        Book a new appointment or view your upcoming doctor visits.
+      </p>
+    </section>
+    <section class="appointments-section">
+      <form id="appointment-form" autocomplete="off">
+        <label for="patient">Patient Name:</label>
+        <input type="text" id="patient" name="patient" required />
+        <label for="doctor">Doctor Name:</label>
+        <input type="text" id="doctor" name="doctor" required />
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required />
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required />
+        <button type="submit" class="btn btn-primary">Book Appointment</button>
+      </form>
+      <div id="appointment-status" class="status-box" style="display:none;"></div>
+      <h2>Upcoming Appointments</h2>
+      <div id="appointments-list" class="appointments-list"></div>
+    </section>
+  </main>
+  <footer>
+    © 2025 Seizure Prediction Web App
+  </footer>
+  <script src="assets/main.js"></script>
+  <script src="assets/appointments.js"></script>
+</body>
+</html>
