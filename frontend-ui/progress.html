@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seizure Prediction – Progress</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet"/>
+</head>
+<body class="gradient-bg">
+  <nav class="navbar">
+    <div class="nav-brand">Seizure Prediction</div>
+    <button class="nav-toggle" aria-label="Open menu">
+      <span class="hamburger"></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="predict.html">Predict</a></li>
+      <li><a href="appointments.html">Appointments</a></li>
+      <li><a href="medication.html">Medication</a></li>
+      <li><a href="progress.html" class="active">Progress</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="hero">
+      <h1>Seizure Progress Tracking</h1>
+      <p class="subtitle">
+        Log seizure events and monitor your improvement over time.
+      </p>
+    </section>
+    <section class="progress-section">
+      <form id="progress-form" autocomplete="off">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required />
+        <label for="patient">Patient Name:</label>
+        <input type="text" id="patient" name="patient" required />
+        <label for="occurred">Occurred (0 = No, 1 = Yes):</label>
+        <input type="number" id="occurred" name="occurred" min="0" max="1" required />
+        <label for="notes">Notes:</label>
+        <input type="text" id="notes" name="notes" />
+        <button type="submit" class="btn btn-primary">Log Progress</button>
+      </form>
+      <div id="progress-status" class="status-box" style="display:none;"></div>
+      <h2>Progress Log</h2>
+      <div id="progress-list" class="progress-list"></div>
+    </section>
+  </main>
+  <footer>
+    © 2025 Seizure Prediction Web App
+  </footer>
+  <script src="assets/main.js"></script>
+  <script src="assets/progress.js"></script>
+</body>
+</html>
