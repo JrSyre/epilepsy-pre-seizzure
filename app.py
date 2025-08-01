@@ -40,6 +40,14 @@ def serve_progress():
 def serve_assets(filename):
     return send_from_directory('frontend-ui/assets', filename)
 
+# Redirect .html URLs to the correct route (optional, for user convenience)
+@app.route('/<page>.html')
+def redirect_html(page):
+    from flask import redirect, url_for
+    if page in ['index', 'predict', 'appointments', 'medication', 'progress']:
+        return redirect('/' if page == 'index' else f'/{page}')
+    return '', 404
+
 def create_app():
     """Create and configure the Flask application."""
     app = Flask(__name__)
