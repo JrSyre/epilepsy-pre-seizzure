@@ -3,7 +3,7 @@ Main Flask application for Seizure Prediction Web App
 A patient-centered web application for predicting seizures using ML models.
 """
 
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 import os
 
@@ -12,6 +12,33 @@ from routes.predict import predict_bp
 from routes.appointments import appointments_bp
 from routes.medication import medication_bp
 from routes.progress import progress_bp
+from frontend import frontend_bp
+
+app = Flask(__name__, static_folder='frontend-ui/assets')
+
+@app.route('/')
+def serve_index():
+    return send_from_directory('frontend-ui', 'index.html')
+
+@app.route('/predict')
+def serve_predict():
+    return send_from_directory('frontend-ui', 'predict.html')
+
+@app.route('/appointments')
+def serve_appointments():
+    return send_from_directory('frontend-ui', 'appointments.html')
+
+@app.route('/medication')
+def serve_medication():
+    return send_from_directory('frontend-ui', 'medication.html')
+
+@app.route('/progress')
+def serve_progress():
+    return send_from_directory('frontend-ui', 'progress.html')
+
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    return send_from_directory('frontend-ui/assets', filename)
 
 def create_app():
     """Create and configure the Flask application."""
@@ -29,6 +56,7 @@ def create_app():
     app.register_blueprint(appointments_bp, url_prefix='/api')
     app.register_blueprint(medication_bp, url_prefix='/api')
     app.register_blueprint(progress_bp, url_prefix='/api')
+    app.register_blueprint(frontend_bp)
     
     @app.route('/')
     def health_check():
@@ -56,6 +84,4 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    app = create_app()
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True) 
+    app.run(debug=True) 
