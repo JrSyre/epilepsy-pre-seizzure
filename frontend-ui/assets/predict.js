@@ -22,13 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
       resultBox.textContent = 'Please enter exactly 115 valid numbers.';
       return;
     }
-    fetch('/predict', {
+    const url = 'http://127.0.0.1:5000/api/predict';
+    fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({features})
     })
-    .then(res => res.json())
+    .then(res => {
+      console.log('Fetch response:', res);
+      if (!res.ok) throw new Error('HTTP status ' + res.status);
+      return res.json();
+    })
     .then(data => {
+      console.log('Prediction data:', data);
       resultBox.style.display = 'block';
       if (data.prediction === 1) {
         resultBox.className = 'status-box high-risk';
@@ -49,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
       resultBox.style.display = 'block';
       resultBox.className = 'status-box error';
       resultBox.textContent = 'Error contacting backend: ' + err;
+      console.error('Fetch error:', err);
     });
   });
 });
