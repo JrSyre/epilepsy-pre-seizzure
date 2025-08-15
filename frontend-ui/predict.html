@@ -35,6 +35,12 @@
         <button type="submit" class="btn btn-primary">Predict</button>
         <button type="button" class="btn" id="sample-btn">Sample Input</button>
       </form>
+      <div class="divider" style="margin: 20px 0; text-align:center; opacity:0.7;">or</div>
+      <form id="predict-file-form" enctype="multipart/form-data">
+        <label for="eeg-file">Upload EEG features file (CSV or JSON array, 115 values):</label>
+        <input type="file" id="eeg-file" name="file" accept=".csv,.txt,.json" />
+        <button type="submit" class="btn">Predict from File</button>
+      </form>
       <div id="prediction-result" class="status-box" style="display:none;"></div>
     </section>
   </main>

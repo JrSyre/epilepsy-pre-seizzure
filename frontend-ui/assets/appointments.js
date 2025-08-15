@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const listBox = document.getElementById('appointments-list');
 
   function fetchAppointments() {
-    fetch('/appointments')
+    fetch('/api/appointments')
       .then(res => res.json())
       .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          listBox.innerHTML = data.map(appt => `
+        const items = Array.isArray(data) ? data : (data.appointments || []);
+        if (items.length > 0) {
+          listBox.innerHTML = items.map(appt => `
             <div class="appointment-card">
               <div><strong>Patient:</strong> ${appt.patient}</div>
               <div><strong>Doctor:</strong> ${appt.doctor}</div>
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       date: form.date.value,
       time: form.time.value
     };
-    fetch('/appointments', {
+    fetch('/api/appointments', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)

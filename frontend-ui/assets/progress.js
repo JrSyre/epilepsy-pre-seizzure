@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const listBox = document.getElementById('progress-list');
 
   function fetchProgress() {
-    fetch('/progress')
+    fetch('/api/progress')
       .then(res => res.json())
       .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          listBox.innerHTML = data.map(log => `
+        const items = Array.isArray(data) ? data : (data.logs || []);
+        if (items.length > 0) {
+          listBox.innerHTML = items.map(log => `
             <div class="progress-card${log.occurred ? ' occurred' : ''}">
               <div><strong>Date:</strong> ${log.date}</div>
               <div><strong>Patient:</strong> ${log.patient}</div>
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       occurred: parseInt(form.occurred.value, 10),
       notes: form.notes.value
     };
-    fetch('/progress', {
+    fetch('/api/progress', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)

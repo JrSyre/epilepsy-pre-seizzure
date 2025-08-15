@@ -78,6 +78,10 @@ def create_app():
         }
     return api_app
 
+# Print all registered routes for debugging
+for rule in app.url_map.iter_rules():
+    print(rule)
+
 if __name__ == '__main__':
     app = create_app()
     app.run(debug=True) 

@@ -8,6 +8,8 @@ import joblib
 import numpy as np
 import random
 import os
+import json
+import re
 
 predict_bp = Blueprint('predict', __name__)
 
@@ -41,15 +43,26 @@ NORMAL_EEG_MESSAGES = [
 # Global variables for model and scaler
 model = None
 scaler = None
+MODEL_PATH = None
+SCALER_PATH = None
+
+def _resolve_model_paths():
+    """Resolve absolute filesystem paths for model and scaler."""
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    default_model = os.path.join(base_dir, 'models', 'best_mlp_model.joblib')
+    default_scaler = os.path.join(base_dir, 'models', 'mlp_scaler.joblib')
+    model_path = os.environ.get('MODEL_PATH', default_model)
+    scaler_path = os.environ.get('SCALER_PATH', default_scaler)
+    return model_path, scaler_path
 
 def load_model():
     """Load the trained ML model and scaler from joblib files."""
-    global model, scaler
-    
+    global model, scaler, MODEL_PATH, SCALER_PATH
+
     try:
-        model_path = os.path.join('models', 'best_mlp_model.joblib')
-        scaler_path = os.path.join('models', 'mlp_scaler.joblib')
-        
+        model_path, scaler_path = _resolve_model_paths()
+        MODEL_PATH, SCALER_PATH = model_path, scaler_path
+
         if os.path.exists(model_path) and os.path.exists(scaler_path):
             model = joblib.load(model_path)
             scaler = joblib.load(scaler_path)
@@ -60,6 +73,22 @@ def load_model():
     except Exception as e:
         print(f"Error loading model: {str(e)}")
         return False
+
+@predict_bp.route('/predict/model/status', methods=['GET'])
+def model_status():
+    """Return model loading status and file information for diagnostics."""
+    model_path, scaler_path = _resolve_model_paths()
+    model_exists = os.path.exists(model_path)
+    scaler_exists = os.path.exists(scaler_path)
+    return jsonify({
+        "loaded": model is not None and scaler is not None,
+        "model_path": model_path,
+        "scaler_path": scaler_path,
+        "model_exists": model_exists,
+        "scaler_exists": scaler_exists,
+        "model_mtime": os.path.getmtime(model_path) if model_exists else None,
+        "scaler_mtime": os.path.getmtime(scaler_path) if scaler_exists else None
+    })
 
 @predict_bp.route('/predict', methods=['POST'])
 def predict_seizure():
@@ -88,16 +117,52 @@ def predict_seizure():
             }), 500
     
     try:
-        # Get JSON data from request
-        data = request.get_json()
-        
-        if not data or 'features' not in data:
-            return jsonify({
-                "error": "Invalid input",
-                "message": "Please provide 'features' array with 115 EEG values"
-            }), 400
-        
-        features = data['features']
+        # Attempt to extract features from either a file upload or JSON body
+        features = None
+
+        # 1) Multipart/form-data with a file
+        if 'file' in request.files:
+            uploaded_file = request.files['file']
+            try:
+                raw_text = uploaded_file.read().decode('utf-8', errors='ignore')
+            except Exception:
+                return jsonify({
+                    "error": "Invalid file encoding",
+                    "message": "Could not decode uploaded file as UTF-8"
+                }), 400
+
+            # Try JSON array first
+            parsed = None
+            try:
+                parsed_json = json.loads(raw_text)
+                if isinstance(parsed_json, list):
+                    parsed = parsed_json
+            except Exception:
+                parsed = None
+
+            if parsed is None:
+                # Fallback: parse as CSV/whitespace separated numbers
+                tokens = re.split(r'[\s,;]+', raw_text.strip()) if raw_text.strip() else []
+                try:
+                    parsed = [float(t) for t in tokens if t != '']
+                except ValueError:
+                    return jsonify({
+                        "error": "Invalid file content",
+                        "message": "File must contain 115 numeric values (CSV, whitespace, or JSON array)"
+                    }), 400
+
+            features = parsed
+
+        else:
+            # 2) JSON body { "features": [...] }
+            data = request.get_json(silent=True)
+            if data and 'features' in data:
+                features = data['features']
+            else:
+                return jsonify({
+                    "error": "Invalid input",
+                    "message": "Provide 'features' JSON array or upload a file under field name 'file'"
+                }), 400
         
         # Validate input
         if not isinstance(features, list) or len(features) != 115:
