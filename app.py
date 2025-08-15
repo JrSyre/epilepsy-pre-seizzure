@@ -17,14 +17,35 @@ from frontend import frontend_bp
 # Top-level app for static HTML and assets
 app = Flask(__name__, static_folder='frontend-ui/assets')
 
+# Register API blueprints directly on the main app
+CORS(app)
+app.config['JSON_SORT_KEYS'] = False
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+
+# Register API blueprints
+app.register_blueprint(predict_bp, url_prefix='/api')
+app.register_blueprint(appointments_bp, url_prefix='/api')
+app.register_blueprint(medication_bp, url_prefix='/api')
+app.register_blueprint(progress_bp, url_prefix='/api')
+
+# Health check endpoints
+@app.route('/api/health')
+def api_health():
+    return {
+        "status": "success",
+        "message": "API endpoints are available",
+        "endpoints": [
+            "/api/predict",
+            "/api/appointments",
+            "/api/medication",
+            "/api/progress"
+        ]
+    }
+
 # Serve static HTML pages
 @app.route('/')
 def serve_index():
     return send_from_directory('frontend-ui', 'index.html')
-
-@app.route('/predict')
-def serve_predict():
-    return send_from_directory('frontend-ui', 'predict.html')
 
 @app.route('/appointments')
 def serve_appointments():
@@ -50,38 +71,14 @@ def redirect_html(page):
         return redirect('/' if page == 'index' else f'/{page}')
     return '', 404
 
-# Factory for API endpoints and blueprints
-
-def create_app():
-    api_app = app  # Use the top-level app for both static and API
-    CORS(api_app)
-    api_app.config['JSON_SORT_KEYS'] = False
-    api_app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-    # Register API blueprints
-    api_app.register_blueprint(predict_bp, url_prefix='/api')
-    api_app.register_blueprint(appointments_bp, url_prefix='/api')
-    api_app.register_blueprint(medication_bp, url_prefix='/api')
-    api_app.register_blueprint(progress_bp, url_prefix='/api')
-    api_app.register_blueprint(frontend_bp)
-    # Health check endpoints
-    @api_app.route('/api/health')
-    def api_health():
-        return {
-            "status": "success",
-            "message": "API endpoints are available",
-            "endpoints": [
-                "/api/predict",
-                "/api/appointments",
-                "/api/medication",
-                "/api/progress"
-            ]
-        }
-    return api_app
+# Handle /predict route to serve the predict page
+@app.route('/predict')
+def serve_predict():
+    return send_from_directory('frontend-ui', 'predict.html')
 
 # Print all registered routes for debugging
 for rule in app.url_map.iter_rules():
     print(rule)
 
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True) 
