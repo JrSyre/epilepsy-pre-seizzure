@@ -1,8 +1,8 @@
-# 🧠 Seizure Prediction Web App - Backend API
+# Seizure Prediction Web App - Backend API
 
 A patient-centered Flask backend for predicting seizures using machine learning models. This API provides endpoints for seizure prediction, appointment management, medication scheduling, and progress tracking.
 
-## 🚀 Features
+## Features
 
 - **Seizure Prediction**: ML-powered EEG analysis with natural language responses
 - **Appointment Management**: Book and manage doctor appointments
@@ -10,7 +10,7 @@ A patient-centered Flask backend for predicting seizures using machine learning 
 - **Progress Tracking**: Monitor treatment progress and seizure trends
 - **RESTful API**: Clean JSON-based endpoints with comprehensive error handling
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 phil/
@@ -28,12 +28,22 @@ phil/
 │   ├── README.md         # Model documentation
 │   ├── best_mlp_model.joblib    # Trained ML model (required)
 │   └── mlp_scaler.joblib        # Feature scaler (required)
+├── notebooks/            # Jupyter notebooks for model training
+│   ├── README.md         # Notebook documentation
+│   └── *.ipynb           # Training notebooks
+├── frontend-ui/          # Frontend web interface
+│   ├── index.html        # Home page
+│   ├── predict.html      # Prediction page
+│   ├── appointments.html # Appointments page
+│   ├── medication.html   # Medication page
+│   ├── progress.html     # Progress page
+│   └── assets/           # CSS, JS, and other assets
 └── utils/                # Helper utilities
     ├── __init__.py
     └── helpers.py        # Common utility functions
 ```
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 ### Prerequisites
 
@@ -65,7 +75,7 @@ phil/
 
 The API will be available at `http://localhost:5000`
 
-## 🔗 API Endpoints
+## API Endpoints
 
 ### Health Check
 - **GET** `/` - Application health status
@@ -139,7 +149,7 @@ The API will be available at `http://localhost:5000`
 }
 ```
 
-## 🧪 Testing the API
+## Testing the API
 
 ### Using curl
 
@@ -168,7 +178,7 @@ The API will be available at `http://localhost:5000`
 2. Set base URL to `http://localhost:5000`
 3. Use the JSON examples above for request bodies
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -198,7 +208,7 @@ For production deployment on Render.com:
    - `PORT`: Set by Render
    - `FLASK_ENV`: production
 
-## 📊 ML Model Requirements
+## ML Model Requirements
 
 The API expects the following ML model setup:
 
@@ -207,7 +217,7 @@ The API expects the following ML model setup:
 - **Format**: joblib serialized files
 - **Files**: `best_mlp_model.joblib` and `mlp_scaler.joblib`
 
-## 🚨 Error Handling
+## Error Handling
 
 All endpoints return standardized error responses:
 
@@ -227,14 +237,14 @@ Common HTTP status codes:
 - `409` - Conflict
 - `500` - Internal Server Error
 
-## 🔒 Security Considerations
+## Security Considerations
 
 - Input validation on all endpoints
 - SQL injection prevention (when using database)
 - CORS enabled for frontend integration
 - Input sanitization for user-provided data
 
-## 📝 Development
+## Development
 
 ### Adding New Endpoints
 
@@ -250,7 +260,7 @@ Common HTTP status codes:
 - Use type hints where appropriate
 - Include comprehensive error handling
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -258,11 +268,11 @@ Common HTTP status codes:
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
-## 🆘 Support
+## Support
 
 For support or questions:
 - Check the API documentation
@@ -272,4 +282,4 @@ For support or questions:
 
 ---
 
-**Note**: This is Phase 1 (Backend) of the Seizure Prediction Web App. The frontend will be built in Phase 2. 
+**Note**: This is a complete Seizure Prediction Web App with both backend API and frontend interface fully implemented and functional. 
