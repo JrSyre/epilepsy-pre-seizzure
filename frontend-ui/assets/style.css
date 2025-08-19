@@ -369,12 +369,14 @@ body.gradient-bg {
   }
   
   .nav-links a {
-    padding: 0.8rem 2rem;
+    padding: 0.5rem 1.5rem;
     border-radius: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 0.2rem 1rem;
+    margin: 0.1rem 1rem;
     border-radius: var(--radius);
     transition: all 0.2s ease;
+    line-height: 1.2;
+    display: inline-block;
   }
   
   .nav-links a:last-child {
@@ -386,6 +388,7 @@ body.gradient-bg {
     background: var(--purple);
     color: var(--navy);
     transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(162, 89, 255, 0.3);
   }
   
   .nav-toggle {
