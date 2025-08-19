@@ -116,15 +116,47 @@ class NotificationSystem {
                         <div class="notification-time">${this.formatTime(notification.timestamp)}</div>
                     </div>
                 </div>
+                <div class="notification-actions">
+                    ${notification.unread ? 
+                        `<button class="action-btn mark-read" title="Mark as read" data-id="${notification.id}">
+                            <i class="fas fa-check"></i>
+                        </button>` : ''
+                    }
+                    <button class="action-btn delete-notification" title="Delete notification" data-id="${notification.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
             </div>
         `).join('');
 
         // Add click listeners to notification items
         this.notificationList.querySelectorAll('.notification-item').forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (e) => {
+                // Don't trigger if clicking on action buttons
+                if (e.target.closest('.notification-actions')) {
+                    return;
+                }
+                
                 const notificationId = parseFloat(item.dataset.id);
                 this.markAsRead(notificationId);
                 this.handleNotificationClick(notificationId);
+            });
+        });
+
+        // Add click listeners to action buttons
+        this.notificationList.querySelectorAll('.mark-read').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const notificationId = parseFloat(btn.dataset.id);
+                this.markAsRead(notificationId);
+            });
+        });
+
+        this.notificationList.querySelectorAll('.delete-notification').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const notificationId = parseFloat(btn.dataset.id);
+                this.removeNotification(notificationId);
             });
         });
     }
@@ -278,40 +310,11 @@ class NotificationSystem {
             }
         }
     }
-
-    // Add sample notifications for demonstration
-    addSampleNotifications() {
-        this.addNotification({
-            type: 'medication',
-            title: 'Medication Reminder',
-            message: 'Time to take your morning medication - Lamotrigine 100mg',
-            priority: 'high'
-        });
-
-        this.addNotification({
-            type: 'appointment',
-            title: 'Appointment Tomorrow',
-            message: 'You have a follow-up appointment with Dr. Smith tomorrow at 2:00 PM',
-            priority: 'medium'
-        });
-
-        this.addNotification({
-            type: 'reminder',
-            title: 'Seizure Log Reminder',
-            message: 'Don\'t forget to log any seizure activity in your progress tracker',
-            priority: 'low'
-        });
-    }
 }
 
 // Initialize notification system when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const notificationSystem = new NotificationSystem();
-    
-    // Add sample notifications for demonstration (remove in production)
-    if (notificationSystem.notifications.length === 0) {
-        notificationSystem.addSampleNotifications();
-    }
     
     // Request notification permission
     if ('Notification' in window && Notification.permission === 'default') {
