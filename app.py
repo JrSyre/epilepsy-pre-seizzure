@@ -18,6 +18,7 @@ from routes.predict import predict_bp
 from routes.appointments import appointments_bp
 from routes.medication import medication_bp
 from routes.progress import progress_bp
+from routes.payments import payments_bp
 
 def create_app(config_name=None):
     """Application factory pattern."""
@@ -38,6 +39,7 @@ def create_app(config_name=None):
     app.register_blueprint(appointments_bp, url_prefix='/api')
     app.register_blueprint(medication_bp, url_prefix='/api')
     app.register_blueprint(progress_bp, url_prefix='/api')
+    app.register_blueprint(payments_bp, url_prefix='/api')
     
     return app
 
@@ -54,7 +56,9 @@ def api_health():
             "/api/predict",
             "/api/appointments",
             "/api/medication",
-            "/api/progress"
+            "/api/progress",
+            "/api/payments/config",
+            "/api/payments/create-intent"
         ]
     }
 

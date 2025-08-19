@@ -753,3 +753,29 @@ footer {
   background: #43e97b;
   color: #1B1F3B;
 }
+
+.payment-card {
+  background: rgba(27,31,59,0.85);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  max-width: 520px;
+  box-shadow: var(--shadow);
+}
+
+.payment-card h3 {
+  margin: 0 0 0.4rem 0;
+}
+
+.payment-subtitle {
+  margin-top: 0;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.stripe-card {
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.1);
+}

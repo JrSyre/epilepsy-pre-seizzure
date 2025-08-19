@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/style.css"/>
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body class="gradient-bg">
   <nav class="navbar">
@@ -58,8 +59,16 @@
         <input type="date" id="date" name="date" required />
         <label for="time">Time:</label>
         <input type="time" id="time" name="time" required />
-        <button type="submit" class="btn btn-primary">Book Appointment</button>
       </form>
+
+      <div class="payment-card">
+        <h3>Appointment Payment</h3>
+        <p class="payment-subtitle">Secure payment powered by Stripe</p>
+        <div id="card-element" class="stripe-card"></div>
+        <div id="card-errors" class="status-box error" style="display:none;"></div>
+        <button id="pay-book" class="btn btn-primary" style="margin-top:1rem;">Pay & Book Appointment</button>
+      </div>
+
       <div id="appointment-status" class="status-box" style="display:none;"></div>
       <h2>Upcoming Appointments</h2>
       <div id="appointments-list" class="appointments-list"></div>
@@ -71,5 +80,6 @@
   <script src="assets/main.js"></script>
   <script src="assets/appointments.js"></script>
   <script src="assets/notifications.js"></script>
+  <script src="assets/stripe.js"></script>
 </body>
 </html>
