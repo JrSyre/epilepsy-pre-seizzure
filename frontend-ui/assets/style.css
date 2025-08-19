@@ -369,13 +369,23 @@ body.gradient-bg {
   }
   
   .nav-links a {
-    padding: 1rem 2rem;
+    padding: 0.8rem 2rem;
     border-radius: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.2rem 1rem;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
   }
   
   .nav-links a:last-child {
     border-bottom: none;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: var(--purple);
+    color: var(--navy);
+    transform: translateX(5px);
   }
   
   .nav-toggle {
