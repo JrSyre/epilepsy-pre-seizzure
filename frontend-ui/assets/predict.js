@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
       resultBox.textContent = 'Please enter exactly 115 valid numbers.';
       return;
     }
-    const url = 'http://127.0.0.1:5000/api/predict';
+    const url = '/api/predict';
     fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formData = new FormData();
     formData.append('file', fileInput.files[0]);
 
-    const url = 'http://127.0.0.1:5000/api/predict';
+    const url = '/api/predict';
     fetch(url, {
       method: 'POST',
       body: formData
