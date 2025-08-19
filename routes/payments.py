@@ -4,16 +4,35 @@ Provides endpoints to fetch publishable key and create PaymentIntents.
 """
 
 import os
+import re
 from flask import Blueprint, jsonify, request
 import stripe
 
 payments_bp = Blueprint('payments', __name__)
 
+# Helpers
+
+def _parse_int_env(var_name: str, default_value: int) -> int:
+    raw = os.environ.get(var_name)
+    if not raw:
+        return default_value
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        # Extract first integer substring if present (e.g., "2000 (default $20.00)")
+        m = re.search(r"-?\d+", str(raw))
+        if m:
+            try:
+                return int(m.group(0))
+            except ValueError:
+                pass
+        return default_value
+
 # Read Stripe keys from environment
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY', '')
-STRIPE_CURRENCY = os.environ.get('STRIPE_CURRENCY', 'usd')
-APPOINTMENT_PRICE_CENTS = int(os.environ.get('APPOINTMENT_PRICE_CENTS', '2000'))  # default $20.00
+STRIPE_CURRENCY = (os.environ.get('STRIPE_CURRENCY') or 'usd').lower()
+APPOINTMENT_PRICE_CENTS = _parse_int_env('APPOINTMENT_PRICE_CENTS', 2000)  # default $20.00
 
 # Initialize Stripe client if key present
 if STRIPE_SECRET_KEY:
@@ -48,13 +67,18 @@ def create_payment_intent():
 
     try:
         data = request.get_json(silent=True) or {}
-        amount_cents = int(data.get('amount_cents', APPOINTMENT_PRICE_CENTS))
+        amount_cents = _parse_int_env('APPOINTMENT_PRICE_CENTS', APPOINTMENT_PRICE_CENTS)
+        if 'amount_cents' in data:
+            try:
+                amount_cents = int(data.get('amount_cents'))
+            except (TypeError, ValueError):
+                pass
         currency = (data.get('currency') or STRIPE_CURRENCY).lower()
         metadata = data.get('metadata') or {}
 
         # Basic guardrails
-        if amount_cents <= 0:
-            return jsonify({'error': 'invalid_amount', 'message': 'Amount must be greater than zero.'}), 400
+        if not isinstance(amount_cents, int) or amount_cents <= 0:
+            return jsonify({'error': 'invalid_amount', 'message': 'Amount must be a positive integer (cents).'}), 400
 
         intent = stripe.PaymentIntent.create(
             amount=amount_cents,
