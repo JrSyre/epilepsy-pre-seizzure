@@ -18,7 +18,6 @@ from routes.predict import predict_bp
 from routes.appointments import appointments_bp
 from routes.medication import medication_bp
 from routes.progress import progress_bp
-from frontend import frontend_bp
 
 def create_app(config_name=None):
     """Application factory pattern."""
