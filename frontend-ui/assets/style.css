@@ -39,12 +39,223 @@ body.gradient-bg {
   letter-spacing: 1px;
 }
 
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .nav-links {
   display: flex;
   gap: 2rem;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+/* Notification System Styles */
+.notification-container {
+  position: relative;
+}
+
+.notification-bell {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.notification-bell:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #EB5757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 350px;
+  max-height: 400px;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 1001;
+  display: none;
+  overflow: hidden;
+}
+
+.notification-dropdown.show {
+  display: block;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.clear-all {
+  background: none;
+  border: none;
+  color: var(--purple);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.clear-all:hover {
+  background: rgba(162, 89, 255, 0.1);
+}
+
+.notification-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item.unread {
+  background: rgba(162, 89, 255, 0.1);
+}
+
+.notification-item.unread:hover {
+  background: rgba(162, 89, 255, 0.15);
+}
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.notification-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notification-icon.medication {
+  background: #56CC9D;
+}
+
+.notification-icon.appointment {
+  background: #2F80ED;
+}
+
+.notification-icon.alert {
+  background: #EB5757;
+}
+
+.notification-icon.reminder {
+  background: #F2994A;
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: var(--white);
+}
+
+.notification-message {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+.notification-time {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.3rem;
+}
+
+.no-notifications {
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
 }
 
 .nav-links a {
@@ -90,6 +301,10 @@ body.gradient-bg {
 .hamburger::after { top: 8px; }
 
 @media (max-width: 800px) {
+  .nav-center {
+    display: none;
+  }
+  
   .nav-links {
     position: absolute;
     top: 100%;
@@ -106,6 +321,11 @@ body.gradient-bg {
   }
   .nav-toggle {
     display: block;
+  }
+  
+  .notification-dropdown {
+    width: 300px;
+    right: -50px;
   }
 }
 

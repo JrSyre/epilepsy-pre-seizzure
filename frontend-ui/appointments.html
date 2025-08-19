@@ -6,20 +6,40 @@
   <title>Seizure Prediction – Appointments</title>
   <link rel="stylesheet" href="assets/style.css"/>
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 </head>
 <body class="gradient-bg">
   <nav class="navbar">
     <div class="nav-brand">Seizure Prediction</div>
-    <button class="nav-toggle" aria-label="Open menu">
-      <span class="hamburger"></span>
-    </button>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="predict.html">Predict</a></li>
-      <li><a href="appointments.html" class="active">Appointments</a></li>
-      <li><a href="medication.html">Medication</a></li>
-      <li><a href="progress.html">Progress</a></li>
-    </ul>
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="predict.html">Predict</a></li>
+        <li><a href="appointments.html" class="active">Appointments</a></li>
+        <li><a href="medication.html">Medication</a></li>
+        <li><a href="progress.html">Progress</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="notification-container">
+        <button class="notification-bell" id="notificationBell" aria-label="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge" id="notificationBadge">0</span>
+        </button>
+        <div class="notification-dropdown" id="notificationDropdown">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="clear-all" id="clearAllNotifications">Clear All</button>
+          </div>
+          <div class="notification-list" id="notificationList">
+            <!-- Notifications will be populated here -->
+          </div>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Open menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
   </nav>
   <main>
     <section class="hero">
@@ -46,9 +66,10 @@
     </section>
   </main>
   <footer>
-    © 2025 Seizure Prediction Web App
+    <!-- © 2025 Seizure Prediction Web App -->
   </footer>
   <script src="assets/main.js"></script>
   <script src="assets/appointments.js"></script>
+  <script src="assets/notifications.js"></script>
 </body>
 </html>
