@@ -348,23 +348,36 @@ body.gradient-bg {
 
 @media (max-width: 800px) {
   .nav-center {
-    display: none;
-  }
-  
-  .nav-links {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: var(--navy);
-    flex-direction: column;
-    gap: 0;
     display: none;
     z-index: 10;
+    box-shadow: var(--shadow);
   }
-  .nav-links.open {
-    display: flex;
+  
+  .nav-center.open {
+    display: block;
   }
+  
+  .nav-links {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+  }
+  
+  .nav-links a {
+    padding: 1rem 2rem;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-links a:last-child {
+    border-bottom: none;
+  }
+  
   .nav-toggle {
     display: block;
   }
@@ -372,6 +385,21 @@ body.gradient-bg {
   .notification-dropdown {
     width: 300px;
     right: -50px;
+  }
+  
+  /* Hamburger animation */
+  .nav-toggle.open .hamburger {
+    background: transparent;
+  }
+  
+  .nav-toggle.open .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  
+  .nav-toggle.open .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
   }
 }
 
