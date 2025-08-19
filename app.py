@@ -7,6 +7,12 @@ from flask import Flask, send_from_directory
 from flask_cors import CORS
 import os
 
+# Import configuration
+from config import config
+
+# Import database
+from models.database import init_db
+
 # Import blueprints
 from routes.predict import predict_bp
 from routes.appointments import appointments_bp
@@ -14,19 +20,30 @@ from routes.medication import medication_bp
 from routes.progress import progress_bp
 from frontend import frontend_bp
 
-# Top-level app for static HTML and assets
-app = Flask(__name__, static_folder='frontend-ui/assets')
+def create_app(config_name=None):
+    """Application factory pattern."""
+    if config_name is None:
+        config_name = os.environ.get('FLASK_ENV', 'development')
+    
+    app = Flask(__name__, static_folder='frontend-ui/assets')
+    
+    # Load configuration
+    app.config.from_object(config[config_name])
+    
+    # Initialize extensions
+    CORS(app)
+    init_db(app)
+    
+    # Register blueprints
+    app.register_blueprint(predict_bp, url_prefix='/api')
+    app.register_blueprint(appointments_bp, url_prefix='/api')
+    app.register_blueprint(medication_bp, url_prefix='/api')
+    app.register_blueprint(progress_bp, url_prefix='/api')
+    
+    return app
 
-# Register API blueprints directly on the main app
-CORS(app)
-app.config['JSON_SORT_KEYS'] = False
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-
-# Register API blueprints
-app.register_blueprint(predict_bp, url_prefix='/api')
-app.register_blueprint(appointments_bp, url_prefix='/api')
-app.register_blueprint(medication_bp, url_prefix='/api')
-app.register_blueprint(progress_bp, url_prefix='/api')
+# Create app instance
+app = create_app()
 
 # Health check endpoints
 @app.route('/api/health')
